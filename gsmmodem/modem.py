@@ -362,6 +362,8 @@ class GsmModem(SerialComms):
 
         # Call control setup
         self.write('AT+CVHU=0', parseError=False) # Enable call hang-up with ATH command (ignore if command not supported)
+        # Set charset to CP437
+        self.write('AT+CSCS="PCCP437"')
     
     def _unlockSim(self, pin):
         """ Unlocks the SIM card using the specified PIN (if necessary, else does nothing) """

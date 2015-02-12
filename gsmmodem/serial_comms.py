@@ -90,7 +90,7 @@ class SerialComms(object):
             readTermLen = len(readTermSeq)
             rxBuffer = []
             while self.alive:
-                data = self.serial.read(1).decode()
+                data = self.serial.read(1).decode(encoding='cp437')
                 if data != '': # check for timeout
                     #print >> sys.stderr, ' RX:', data,'({0})'.format(ord(data))
                     rxBuffer.append(data)
@@ -120,7 +120,7 @@ class SerialComms(object):
     def write(self, data, waitForResponse=True, timeout=5, expectedResponseTermSeq=None):
         with self._txLock:            
             if isinstance(data, str):
-                data = data.encode()
+                data = data.encode(encoding='cp437')
             if waitForResponse:
                 if expectedResponseTermSeq:
                     self._expectResponseTermSeq = list(expectedResponseTermSeq) 
